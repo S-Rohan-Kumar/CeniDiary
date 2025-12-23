@@ -4,8 +4,11 @@ const MovieContext = createContext();
 
 export const MovieProvider = ({ children }) =>{
     const [movies, setMovies] = useState([]);
-    const [favorites, setFavorites] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [favorites, setFavorites] = useState(() =>{
+        const saved = JSON.parse(localStorage.getItem("favorites"));
+        return saved || [];
+    });
 
     useEffect(() =>{
         const saved = JSON.parse(localStorage.getItem("favorites"));
